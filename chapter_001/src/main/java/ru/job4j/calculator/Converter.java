@@ -9,13 +9,22 @@ package ru.job4j.calculator;
  */
 public class Converter {
     /**
+     * Цена 1 евро в рублях
+     */
+    final private int COSTEURO = 70;
+    /**
+     * Цена одного доллара в рублях
+     */
+    final private int COSTDOLLAR = 60;
+
+    /**
      * Конвертируем рубли в евро.
      *
      * @param value рубли.
      * @return Евро.
      */
     public int rubleToEuro(int value) {
-        return value / 70;
+        return value / COSTEURO;
     }
 
     /**
@@ -25,7 +34,7 @@ public class Converter {
      * @return Доллары
      */
     public int rubleToDollar(int value) {
-        return value / 60;
+        return value / COSTDOLLAR;
     }
 
     /**
@@ -35,7 +44,7 @@ public class Converter {
      * @return рубли.
      */
     public int euroToRuble(int value) {
-        return value * 70;
+        return value * COSTEURO;
     }
 
     /**
@@ -45,6 +54,6 @@ public class Converter {
      * @return рубли.
      */
     public int dollarToRuble(int value) {
-        return value * 60;
+        return value * COSTDOLLAR;
     }
 }
