@@ -8,6 +8,18 @@ package ru.job4j.calculator;
  * @since 0.1
  */
 public class Fit {
+    /**
+     * Const need to count ideal weight to man
+     */
+    final private double FOR_MAN = 100;
+    /**
+     * Const need to count ideal weight to woman
+     */
+    final private double FOR_WOMAN = 110;
+    /**
+     * Const need to count ideal weight to woman and men
+     */
+    final private double CONSTANT = 1.15;
 
     /**
      * Идеальный вес для мужщины.
@@ -16,7 +28,7 @@ public class Fit {
      * @return идеальный вес.
      */
     public double manWeight(double height) {
-        return (height - 100) * 1.15;
+        return (height - FOR_MAN) * CONSTANT;
     }
 
     /**
@@ -26,6 +38,6 @@ public class Fit {
      * @return идеальный вес.
      */
     public double womanWeight(double height) {
-        return (height - 110) * 1.15;
+        return (height - FOR_WOMAN) * CONSTANT;
     }
 }
