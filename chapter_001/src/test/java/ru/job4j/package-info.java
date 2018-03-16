@@ -1,5 +1,5 @@
 /**
-* Package for calculate task.
+* Package for calculate test task.
 *
 * @author Anatoli Shalobasov (proboostbiznes@gmail.com)
 * @version $Id$
