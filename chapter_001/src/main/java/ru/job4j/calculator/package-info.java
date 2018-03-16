@@ -1,5 +1,5 @@
 /**
-* Package for calculator class.
+* Package for calculator folder.
 *
 * @author Anatoli Shalobasov (proboostbiznes@gmail.com)
 * @version $Id$

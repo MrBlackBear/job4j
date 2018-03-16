@@ -1,5 +1,5 @@
 /**
-* Package for calculator test task.
+* Package for calculator folder test.
 *
 * @author Anatoli Shalobasov (proboostbiznes@gmail.com)
 * @version $Id$
