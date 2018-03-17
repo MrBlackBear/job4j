@@ -11,11 +11,11 @@ public class Converter {
     /**
      * Цена 1 евро в рублях
      */
-    final private int COSTEURO = 70;
+    private static final int COST_EURO = 70;
     /**
      * Цена одного доллара в рублях
      */
-    final private int COSTDOLLAR = 60;
+    private static final int COST_DOLLAR = 60;
 
     /**
      * Конвертируем рубли в евро.
@@ -24,7 +24,7 @@ public class Converter {
      * @return Евро.
      */
     public int rubleToEuro(int value) {
-        return value / COSTEURO;
+        return value / COST_EURO;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Converter {
      * @return Доллары
      */
     public int rubleToDollar(int value) {
-        return value / COSTDOLLAR;
+        return value / COST_DOLLAR;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Converter {
      * @return рубли.
      */
     public int euroToRuble(int value) {
-        return value * COSTEURO;
+        return value * COST_EURO;
     }
 
     /**
@@ -54,6 +54,6 @@ public class Converter {
      * @return рубли.
      */
     public int dollarToRuble(int value) {
-        return value * COSTDOLLAR;
+        return value * COST_DOLLAR;
     }
 }
