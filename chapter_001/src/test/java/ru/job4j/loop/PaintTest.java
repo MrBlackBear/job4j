@@ -21,7 +21,7 @@ public class PaintTest {
     @Test
     public void whenPyramidHeightTwo() {
         Paint paint = new Paint();
-        String rst = paint.pyramid(2);
+        String rst = paint.pyramid(2, (row, column) -> row >= 1 - column && row + 1 >= column);
         System.out.println(rst);
         assertThat(rst,
                 is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
@@ -37,7 +37,7 @@ public class PaintTest {
     @Test
     public void whenPyramidHeightThree() {
         Paint paint = new Paint();
-        String rst = paint.pyramid(3);
+        String rst = paint.pyramid(3, (row, column) -> row >= 2 - column && row + 2 >= column);
         System.out.println(rst);
         assertThat(rst,
                 is(new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
