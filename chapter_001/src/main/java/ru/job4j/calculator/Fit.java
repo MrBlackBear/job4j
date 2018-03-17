@@ -11,15 +11,15 @@ public class Fit {
     /**
      * Const need to count ideal weight to man
      */
-    final private double FOR_MAN = 100;
+    private static final double FOR_MAN = 100;
     /**
      * Const need to count ideal weight to woman
      */
-    final private double FOR_WOMAN = 110;
+    private static final double FOR_WOMAN = 110;
     /**
      * Const need to count ideal weight to woman and men
      */
-    final private double CONSTANT = 1.15;
+    private static final double CONSTANT = 1.15;
 
     /**
      * Идеальный вес для мужщины.
