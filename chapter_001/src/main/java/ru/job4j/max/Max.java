@@ -28,6 +28,6 @@ public class Max {
      * @return the largest number
      */
     public int max(int first, int second, int third) {
-        return this.max(this.max(first, second), this.max(second, third));
+        return this.max(this.max(first, second), third);
     }
 }
