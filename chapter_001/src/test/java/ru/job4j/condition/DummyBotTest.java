@@ -11,12 +11,12 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class DummyBotTest {
+    DummyBot bot = new DummyBot();
     /**
      * Test answer when greetings
      */
     @Test
     public void whenGreetBot() {
-        DummyBot bot = new DummyBot();
         assertThat(
                 bot.answer("Привет, Бот"),
                 is("Привет, умник.")
@@ -28,7 +28,6 @@ public class DummyBotTest {
      */
     @Test
     public void whenByuBot() {
-        DummyBot bot = new DummyBot();
         assertThat(
                 bot.answer("Пока."),
                 is("До скорой встречи.")
@@ -40,7 +39,6 @@ public class DummyBotTest {
      */
     @Test
     public void whenUnknownBot() {
-        DummyBot bot = new DummyBot();
         assertThat(
                 bot.answer("Сколько будет 2 + 2?"),
                 is("Это ставит меня в тупик. Спросите другой вопрос.")

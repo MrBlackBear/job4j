@@ -13,12 +13,12 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class FitTest {
+    Fit fit = new Fit();
     /**
      * Test manWeight.
      */
     @Test
     public void manWeight() {
-        Fit fit = new Fit();
         double weight = fit.manWeight(180);
         assertThat(weight, is(92.0));
     }
@@ -28,7 +28,6 @@ public class FitTest {
      */
     @Test
     public void womanWeight() {
-        Fit fit = new Fit();
         double weight = fit.womanWeight(170);
         assertThat(weight, is(69.0));
     }

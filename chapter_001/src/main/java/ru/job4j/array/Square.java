@@ -18,10 +18,10 @@ public class Square {
         if (bound == 0) {
             return new int[0];
         }
-        int[] rst = new int[bound];
+        int[] result = new int[bound];
         for (int i = 1; i <= bound; i++) {
-            rst[i - 1] = i * i;
+            result[i - 1] = i * i;
         }
-        return rst;
+        return result;
     }
 }

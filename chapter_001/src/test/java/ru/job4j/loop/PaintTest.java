@@ -15,12 +15,12 @@ import static org.junit.Assert.*;
  * @since 0.1
  */
 public class PaintTest {
+    Paint paint = new Paint();
     /**
      * Test paint.
      */
     @Test
     public void whenPyramidHeightTwo() {
-        Paint paint = new Paint();
         String rst = paint.pyramid(2, (row, column) -> row >= 1 - column && row + 1 >= column);
         System.out.println(rst);
         assertThat(rst,
@@ -36,7 +36,6 @@ public class PaintTest {
      */
     @Test
     public void whenPyramidHeightThree() {
-        Paint paint = new Paint();
         String rst = paint.pyramid(3, (row, column) -> row >= 2 - column && row + 2 >= column);
         System.out.println(rst);
         assertThat(rst,

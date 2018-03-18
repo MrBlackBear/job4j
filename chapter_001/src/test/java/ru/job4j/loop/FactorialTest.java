@@ -13,12 +13,12 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class FactorialTest {
+    Factorial fact = new Factorial();
     /**
      * Test calc.
      */
     @Test
     public void whenIsZeroThenFactorialOne() {
-        Factorial fact = new Factorial();
         int result = fact.calc(0);
         assertThat(result, is(1));
     }
@@ -28,7 +28,6 @@ public class FactorialTest {
      */
     @Test
     public void whenIsFiveThenFactorialOfFiveIs120() {
-        Factorial fact = new Factorial();
         int result = fact.calc(5);
         assertThat(result, is(120));
     }

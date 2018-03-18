@@ -20,13 +20,13 @@ public class Word {
         boolean result = false;
         char[] value = prefix.toCharArray();
         int index;
-        for (int i = 0; i <= charsOfWord.length - value.length; i++) {
+        for (int countInWord = 0; countInWord <= charsOfWord.length - value.length; countInWord++) {
             if (result == true) {
                 break;
             }
-            index = i;
-            for (int j = 0; j < value.length; j++) {
-                if (charsOfWord[index] != value[j]) {
+            index = countInWord;
+            for (int countInPrefix = 0; countInPrefix < value.length; countInPrefix++) {
+                if (charsOfWord[index] != value[countInPrefix]) {
                     result = false;
                     break;
                 } else {

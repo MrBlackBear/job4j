@@ -18,12 +18,12 @@ public class ArrayDuplicate {
      */
     public String[] remove(String[] array) {
         int unique = array.length;
-        for (int i = 0; i < unique; i++) {
-            for (int j = i + 1; j < unique; j++) {
-                if (array[i].equals(array[j])) {
-                    array[j] = array[unique - 1];
+        for (int out = 0; out < unique; out++) {
+            for (int in = out + 1; in < unique; in++) {
+                if (array[out].equals(array[in])) {
+                    array[in] = array[unique - 1];
                     unique--;
-                    j--;
+                    in--;
                 }
             }
         }

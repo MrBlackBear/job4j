@@ -13,12 +13,12 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class ArrayCharTest {
+    ArrayChar word = new ArrayChar("Hello");
     /**
      * Test startWith.
      */
     @Test
     public void whenStartWithPrefixThenTrue() {
-        ArrayChar word = new ArrayChar("Hello");
         boolean result = word.startWith("He");
         assertThat(result, is(true));
     }
@@ -28,7 +28,6 @@ public class ArrayCharTest {
      */
     @Test
     public void whenNotStartWithPrefixThenFalse() {
-        ArrayChar word = new ArrayChar("Hello");
         boolean result = word.startWith("Hi");
         assertThat(result, is(false));
     }

@@ -11,13 +11,13 @@ public class Factorial {
     /**
      * Method calc.
      *
-     * @param n number from what we want factorial.
+     * @param number number from what we want factorial.
      * @return factorial of this number
      */
-    public int calc(int n) {
+    public int calc(int number) {
         int result = 1;
-        for (int i = 1; i <= n; i++) {
-            result *= i;
+        for (int count = 1; count <= number; count++) {
+            result *= count;
         }
         return result;
     }

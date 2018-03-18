@@ -11,12 +11,12 @@ import org.junit.Test;
  * @since 0.1
  */
 public class SquareTest {
+    Square square = new Square();
     /**
      * Test calculate.
      */
     @Test
     public void whenBoundIsZeroThenEmptyArray() {
-        Square square = new Square();
         int[] result = square.calculate(0);
         Assert.assertArrayEquals(result, new int[0]);
     }
@@ -26,7 +26,6 @@ public class SquareTest {
      */
     @Test
     public void whenBoundIsFiveThenNeedArray() {
-        Square square = new Square();
         int[] result = square.calculate(5);
         Assert.assertArrayEquals(result, new int[]{1, 4, 9, 16, 25});
     }

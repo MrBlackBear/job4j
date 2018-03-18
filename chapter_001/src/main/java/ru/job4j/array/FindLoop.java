@@ -16,13 +16,13 @@ public class FindLoop {
      * @return index of number or -1
      */
     public int indexOf(int[] data, int el) {
-        int rsl = -1;
+        int result = -1;
         for (int index = 0; index < data.length; index++) {
             if (data[index] == el) {
-                rsl = index;
+                result = index;
                 break;
             }
         }
-        return rsl;
+        return result;
     }
 }
