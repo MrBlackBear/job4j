@@ -48,6 +48,18 @@ public class Item {
     }
 
     /**
+     * Конструктор
+     *
+     * @param name        имя
+     * @param description описание
+     */
+    public Item(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+
+    /**
      * Возвращает id
      */
     public String getId() {

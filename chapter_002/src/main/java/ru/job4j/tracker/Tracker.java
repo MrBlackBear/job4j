@@ -58,8 +58,9 @@ public class Tracker {
      */
     public void replace(String id, Item item) {
         Item result = this.findById(id);
-        result.setId(item.getId());
-        result.setCreate(item.getCreate());
+        if (item.getCreate() != 0D) {
+            result.setCreate(item.getCreate());
+        }
         result.setDescription(item.getDescription());
         result.setName(item.getName());
     }
