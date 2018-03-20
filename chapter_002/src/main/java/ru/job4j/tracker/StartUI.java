@@ -115,10 +115,10 @@ public class StartUI {
      */
     private void editItem() {
         System.out.println("------------ Изменение заявки --------------");
+        String id = this.input.ask("Введите id заявки :");
         String name = this.input.ask("Введите имя новой заявки :");
         String desc = this.input.ask("Введите описание новой заявки :");
         Item newItem = new Item(name, desc);
-        String id = this.input.ask("Введите id заявки :");
         this.tracker.replace(id, newItem);
     }
 
