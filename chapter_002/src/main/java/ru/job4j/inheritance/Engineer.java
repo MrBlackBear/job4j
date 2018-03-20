@@ -5,5 +5,6 @@ public class Engineer extends Profession {
         super(name, profession);
     }
 
-    public void buildHouse(House house){}
+    public void buildHouse(House house) {
+    }
 }
