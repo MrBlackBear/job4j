@@ -109,7 +109,7 @@ public class MenuTracker {
             String desc = input.ask("Введите описание заявки :");
             Item item = new Item(name, desc);
             tracker.add(item);
-            System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
+            System.out.println(String.format("------------ Новая заявка с getId : %s-----------", item.getId()));
 
         }
 
@@ -136,7 +136,7 @@ public class MenuTracker {
             System.out.println("------------ Показывает все элементы --------------");
             Item[] allItems = tracker.findAll();
             for (Item item : allItems) {
-                System.out.println("------------ Заявка с getId : " + item.getId() + "-----------");
+                System.out.println(String.format("------------ Заявка с getId : %s-----------", item.getId()));
             }
         }
 
@@ -188,9 +188,9 @@ public class MenuTracker {
             System.out.println("------------ Нахождение заявки --------------");
             String id = input.ask("Введите id заявки :");
             Item item = tracker.findById(id);
-            System.out.println("------------ Id заявки : " + item.getId() + "-----------");
-            System.out.println("------------ Имя заявки : " + item.getName() + "-----------");
-            System.out.println("------------ Описание заявки : " + item.getDescription() + "-----------");
+            System.out.println(String.format("------------ Id заявки : %s-----------", item.getId()));
+            System.out.println(String.format("------------ Имя заявки : %s-----------", item.getName()));
+            System.out.println(String.format("------------ Описание заявки : %s-----------", item.getDescription()));
         }
 
         @Override
@@ -217,7 +217,7 @@ public class MenuTracker {
             String name = input.ask("Введите имя заявок :");
             Item[] allItems = tracker.findByName(name);
             for (Item item : allItems) {
-                System.out.println("------------ Заявка с getId : " + item.getId() + "-----------");
+                System.out.println(String.format("------------ Заявка с getId : %s-----------", item.getId()));
             }
         }
 
