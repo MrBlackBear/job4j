@@ -11,4 +11,6 @@ public interface Input {
      * @param question вопрос который необходимо задать пользователю
      */
     String ask(String question);
+
+    int ask(String question, int[] range);
 }
