@@ -57,12 +57,12 @@ public class Tracker {
      * @param item элемент на который мы меняем
      */
     public void replace(String id, Item item) {
-        Item result = this.findById(id);
-        if (item.getCreate() != 0D) {
-            result.setCreate(item.getCreate());
+        for (int index = 0; index != position ; index++) {
+            if(items[index].getId().equals(id)) {
+                items[index] = item;
+                items[index].setId(id);
+            }
         }
-        result.setDescription(item.getDescription());
-        result.setName(item.getName());
     }
 
     /**

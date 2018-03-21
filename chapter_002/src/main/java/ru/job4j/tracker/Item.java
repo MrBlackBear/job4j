@@ -16,17 +16,17 @@ public class Item {
     /**
      * Имя
      */
-    private String name;
+    private String name = "";
 
     /**
      * Описание
      */
-    private String description;
+    private String description = "";
 
     /**
      * Создание
      */
-    private long create;
+    private long create = 0L;
 
     /**
      * Стандартный конструктор
