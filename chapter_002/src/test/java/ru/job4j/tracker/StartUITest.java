@@ -41,7 +41,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
     /**
@@ -50,10 +50,11 @@ public class StartUITest {
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item());
-        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"});
+        Item item24 = tracker.add(new Item());
+        String id = item24.getId();
+        Input input = new StubInput(new String[]{"2", id, "test name", "desc", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findById(item.getId()).getName(), is("test name"));
+        assertThat(tracker.findById(id).getName(), is("test name"));
     }
 
     /**
@@ -67,7 +68,7 @@ public class StartUITest {
         tracker.add(new Item());
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(2));
+        assertThat(tracker.findAll().size(), is(2));
     }
 
     /**

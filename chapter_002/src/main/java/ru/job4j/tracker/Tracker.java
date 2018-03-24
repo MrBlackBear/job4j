@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -10,12 +11,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
-
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private final ArrayList<Item> items = new ArrayList<>();
 
     /**
      * Случайно сгенерированное число
@@ -29,7 +25,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -42,7 +38,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
+            if (item.getId().equals(id)) {
                 result = item;
                 break;
             }
@@ -57,12 +53,16 @@ public class Tracker {
      * @param item элемент на который мы меняем
      */
     public void replace(String id, Item item) {
-        for (int index = 0; index != position ; index++) {
-            if(items[index].getId().equals(id)) {
-                items[index] = item;
-                items[index].setId(id);
+        Item result = null;
+        for (Item t : this.items) {
+            if (t.getId().equals(id)) {
+                result = t;
+                break;
             }
         }
+        result.setName(item.getName());
+        result.setCreate(item.getCreate());
+        result.setDescription(item.getDescription());
     }
 
     /**
@@ -70,12 +70,8 @@ public class Tracker {
      *
      * @return возвращает массив только эелментов которые уже добавили.
      */
-    public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+    public ArrayList<Item> findAll() {
+        return this.items;
     }
 
     /**
@@ -84,15 +80,14 @@ public class Tracker {
      * @param id уникальный идентификатор
      */
     public void delete(String id) {
-        int pos = 0;
-        for (int index = 0; index != position; index++) {
-            if (items[index].getId().equals(id)) {
-                pos = index;
+        Item itemFound = null;
+        for (Item item : this.items) {
+            if (item.getId().equals(id)) {
+                itemFound = item;
                 break;
             }
         }
-        position--;
-        System.arraycopy(items, pos + 1, items, pos, 100 - 1 - pos);
+        this.items.remove(itemFound);
     }
 
     /**
@@ -101,16 +96,13 @@ public class Tracker {
      * @param key имя по которому мы ищем
      * @return массив с эелементами которые нашлись
      */
-    public Item[] findByName(String key) {
-        Item[] actual = new Item[100];
-        int pos = 0;
-        for (int i = 0; i != position; i++) {
-            if (items[i].getName().equals(key)) {
-                actual[pos++] = items[i];
+    public ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(key)) {
+                result.add(item);
             }
         }
-        Item[] result = new Item[pos];
-        System.arraycopy(actual, 0, result, 0, pos);
         return result;
     }
 
