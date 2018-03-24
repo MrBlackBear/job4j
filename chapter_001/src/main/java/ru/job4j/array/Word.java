@@ -21,7 +21,7 @@ public class Word {
         char[] value = prefix.toCharArray();
         int index;
         for (int countInWord = 0; countInWord <= charsOfWord.length - value.length; countInWord++) {
-            if (result == true) {
+            if (result) {
                 break;
             }
             index = countInWord;

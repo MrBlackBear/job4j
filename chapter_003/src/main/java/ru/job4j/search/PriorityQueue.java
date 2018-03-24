@@ -18,14 +18,14 @@ public class PriorityQueue {
         for (Task t : this.tasks) {
             if (t.getPriority() <= task.getPriority()) {
                 quantity++;
-            }  else {
+            } else {
                 element = t;
                 break;
             }
         }
         if (quantity == tasks.size()) {
             this.tasks.add(quantity, task);
-        }else {
+        } else {
             this.tasks.add(tasks.indexOf(element), task);
         }
     }

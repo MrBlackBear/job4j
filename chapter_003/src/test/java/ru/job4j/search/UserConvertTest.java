@@ -1,6 +1,6 @@
 package ru.job4j.search;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,11 +13,11 @@ public class UserConvertTest {
     public void whenConvertListThenReturnMap() {
         UserConvert userConvert = new UserConvert();
         List<User> listOfUsers = new ArrayList<>();
-        listOfUsers.add(new User(12,"Alex", "Gomel"));
-        listOfUsers.add(new User(15,"Alex15", "Gomel15"));
-        listOfUsers.add(new User(17,"Alex17", "Gomel17"));
+        listOfUsers.add(new User(12, "Alex", "Gomel"));
+        listOfUsers.add(new User(15, "Alex15", "Gomel15"));
+        listOfUsers.add(new User(17, "Alex17", "Gomel17"));
         HashMap<Integer, User> result = userConvert.process(listOfUsers);
-        HashMap<Integer,User> expected = new HashMap<>();
+        HashMap<Integer, User> expected = new HashMap<>();
         expected.put(12, new User(12, "Alex", "Gomel"));
         expected.put(15, new User(15, "Alex15", "Gomel15"));
         expected.put(17, new User(17, "Alex17", "Gomel17"));

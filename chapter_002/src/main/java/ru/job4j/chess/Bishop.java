@@ -19,7 +19,7 @@ public class Bishop extends Figure {
         if (sourceX < 0 || sourceX > 7 || sourceY < 0 || sourceY > 7 || destX < 0 || destX > 7 || destY < 0 || destY > 7) {
             throw new ImpossibleMoveException("Координаты выходят за пределы поля");
         }
-        if(Math.abs(sourceX - destX) == Math.abs(sourceY - destY)) {
+        if (Math.abs(sourceX - destX) == Math.abs(sourceY - destY)) {
             if (sourceX > destX && sourceY < destY) {
                 for (int y = sourceY; y < destY; y++) {
                     result[position++] = new Cell(--sourceX, ++sourceY);

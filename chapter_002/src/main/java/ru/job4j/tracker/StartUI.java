@@ -5,7 +5,7 @@ package ru.job4j.tracker;
  * @since 0.1
  */
 public class StartUI {
-    private int[] ranges =  new int[]{0,1,2,3,4,5};
+    private int[] ranges = new int[]{0, 1, 2, 3, 4, 5};
     /**
      * Ввод.
      */

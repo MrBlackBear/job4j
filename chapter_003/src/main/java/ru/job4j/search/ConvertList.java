@@ -33,7 +33,7 @@ public class ConvertList {
         int[][] result = new int[needSize][rows];
         int[] ar;
         int position = 0;
-        for (int i = 0; i < newLength; ) {
+        for (int i = 0; i < newLength;) {
             ar = new int[rows];
             for (int j = 0; j < rows; j++) {
                 if (newLengthArray[i] == null) {
@@ -48,7 +48,7 @@ public class ConvertList {
         return result;
     }
 
-    public List<Integer> convert (List<int[]> list){
+    public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<>();
         for (int[] arr : list) {
             for (int item : arr) {

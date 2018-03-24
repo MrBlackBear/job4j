@@ -1,7 +1,7 @@
 package ru.job4j.chess;
 
 public abstract class Figure {
-    public Figure(Cell position){
+    public Figure(Cell position) {
         this.position = position;
     }
 
