@@ -1,6 +1,7 @@
 package ru.job4j;
 
 public class Check {
+
     int[] changes(int value, int price) {
         int[] result = new int[100];
         int index = 0;
