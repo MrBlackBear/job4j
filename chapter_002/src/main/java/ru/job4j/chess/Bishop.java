@@ -45,14 +45,14 @@ public class Bishop extends Figure {
     }
 
     private boolean diffCells(Cell source, Cell dest) {
-        if (!((source.getX() + source.getY() + dest.getY() + dest.getX()) % 2 != 0)) {
+        if ((source.getX() + source.getY() + dest.getY() + dest.getX()) % 2 != 0) {
             throw new ImpossibleMoveException("Не находятся на клетках одинакового цвета");
         }
         return true;
     }
 
     private boolean outwardCells(Cell source, Cell dest) {
-        if (!(source.getX() < 0 || source.getX() > 7 || source.getY() < 0 || source.getY() > 7 || dest.getX() < 0 || dest.getX() > 7 || dest.getY() < 0 || dest.getY() > 7)) {
+        if (source.getX() < 0 || source.getX() > 7 || source.getY() < 0 || source.getY() > 7 || dest.getX() < 0 || dest.getX() > 7 || dest.getY() < 0 || dest.getY() > 7) {
             throw new ImpossibleMoveException("Координаты выходят за пределы поля");
         }
         return true;
