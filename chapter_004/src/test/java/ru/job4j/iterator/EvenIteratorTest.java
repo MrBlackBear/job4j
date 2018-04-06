@@ -9,6 +9,13 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * EvenIteratorTest
+ *
+ * @author Anatoli Shalobasov (proboostbiznes@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class EvenIteratorTest {
     /**
      * Iterator which we test
