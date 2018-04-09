@@ -64,7 +64,7 @@ public class PrimeIterator implements Iterator<Integer> {
             if (isPrime(array[i])) {
                 countOfNeedElements++;
                 element = array[i];
-                indexArray = ++i;
+                indexArray = i + 1;
                 break;
             }
         }
@@ -94,14 +94,16 @@ public class PrimeIterator implements Iterator<Integer> {
      * @return prime number or no
      */
     private boolean isPrime(int num) {
+        boolean result = true;
         if (num < 2) {
-            return false;
+            result = false;
         }
         for (int i = 2; i * i <= num; i += 2) {
             if (num % i == 0) {
-                return false;
+                result = false;
+                break;
             }
         }
-        return true;
+        return result;
     }
 }
