@@ -64,7 +64,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
             if (isEven(array[i])) {
                 countOfNeedElements++;
                 element = array[i];
-                indexArray = ++i;
+                indexArray = i + 1;
                 break;
             }
         }
