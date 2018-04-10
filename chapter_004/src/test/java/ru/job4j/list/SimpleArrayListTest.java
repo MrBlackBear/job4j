@@ -2,12 +2,9 @@ package ru.job4j.list;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.iterator.Converter;
 
-import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -52,7 +49,7 @@ public class SimpleArrayListTest {
         simpleArrayList.add(200);
         simpleArrayList.add(300);
         simpleArrayList.add(400);
-        assertTrue(simpleArrayList.get(10).equals(200));
+        assertThat(simpleArrayList.get(10), is(200));
     }
 
     /**
@@ -60,7 +57,7 @@ public class SimpleArrayListTest {
      */
     @Test
     public void get() {
-        assertTrue(simpleArrayList.get(2).equals(33));
+        assertThat(simpleArrayList.get(2), is(33));
     }
 
     /**
