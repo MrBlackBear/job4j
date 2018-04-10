@@ -97,11 +97,12 @@ public class PrimeIterator implements Iterator<Integer> {
         boolean result = true;
         if (num < 2) {
             result = false;
-        }
-        for (int i = 2; i * i <= num; i += 2) {
-            if (num % i == 0) {
-                result = false;
-                break;
+        } else {
+            for (int i = 2; i * i <= num; i += 2) {
+                if (num % i == 0) {
+                    result = false;
+                    break;
+                }
             }
         }
         return result;
