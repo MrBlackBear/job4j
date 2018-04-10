@@ -34,7 +34,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model number which we add to array
      * @return true if array is not full
      */
-    boolean add(T model) {
+    public boolean add(T model) {
         if (countRealELements == simpleArray.length) {
             return false;
         }
@@ -49,7 +49,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model element which we set in that index
      * @return old element which we change
      */
-    T set(int index, T model) {
+    public T set(int index, T model) {
         T old = simpleArray[index];
         simpleArray[index] = model;
         return old;
@@ -61,7 +61,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index delete element in this index
      * @return delete element
      */
-    T delete(int index) {
+    public T delete(int index) {
         T item;
         if (index == simpleArray.length - 1) {
             item = simpleArray[index];
@@ -79,7 +79,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index by which we get element
      * @return element in array by index
      */
-    T get(int index) {
+    public T get(int index) {
         return simpleArray[index];
     }
 

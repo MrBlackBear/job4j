@@ -44,7 +44,7 @@ public class SimpleArrayList<E> implements Iterable<E> {
      *
      * @param value add element in store
      */
-    void add(E value) {
+    public void add(E value) {
         if (realNumberOfElements == size) {
             int newSize = size * 2;
             Object[] newContainer = new Object[newSize];
@@ -62,7 +62,7 @@ public class SimpleArrayList<E> implements Iterable<E> {
      * @param index index by which return element from store
      * @return element from store by index
      */
-    E get(int index) {
+    public E get(int index) {
         return (E) container[index];
     }
 
