@@ -3,6 +3,7 @@ package ru.job4j.generic;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
@@ -57,8 +58,9 @@ public class UserStoreTest {
     @Test
     public void delete() {
         userStore.delete("44");
-        User expected = new User("");
-        assertTrue(expected.getId().equals(userStore.findById("44").getId()));
+        User expected = null;
+        User result = userStore.findById("44");
+        assertThat(expected, is(result));
     }
 
     /**

@@ -3,6 +3,7 @@ package ru.job4j.generic;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
@@ -57,8 +58,9 @@ public class RoleStoreTest {
     @Test
     public void delete() {
         roleStore.delete("44");
-        Role expected = new Role("");
-        assertTrue(expected.getId().equals(roleStore.findById("44").getId()));
+        Role expected = null;
+        Role result = roleStore.findById("44");
+        assertThat(expected, is(result));
     }
 
     /**

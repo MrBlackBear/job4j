@@ -16,13 +16,4 @@ public class RoleStore extends AbstractStore<Role> implements Store<Role> {
     public RoleStore(int size) {
         super(size);
     }
-
-    @Override
-    public Role findById(String id) {
-        Role result = super.findById(id);
-        if (result == null) {
-            result = new Role("");
-        }
-        return result;
-    }
 }
