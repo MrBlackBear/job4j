@@ -22,4 +22,16 @@ public class User {
      * Date of birth
      */
     private Calendar birth;
+
+    /**
+     * Constructor
+     * @param name name
+     * @param children number of children
+     * @param birth date of birth
+     */
+    public User(String name, int children, Calendar birth) {
+        this.name = name;
+        this.children = children;
+        this.birth = birth;
+    }
 }
