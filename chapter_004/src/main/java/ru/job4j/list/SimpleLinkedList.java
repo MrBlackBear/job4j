@@ -33,7 +33,7 @@ public class SimpleLinkedList<E> implements Iterable<E> {
      *
      * @param value element to add
      */
-    void add(E value) {
+    public void add(E value) {
         Node<E> newNode = new Node<>(value);
         if (first == null) {
             first = newNode;
