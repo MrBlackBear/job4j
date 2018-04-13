@@ -37,14 +37,13 @@ public class User {
         this.birth = birth;
     }
 
-    /**
-     * HashCode of object
-     *
-     * @return hashCode
-     */
     @Override
-    public int hashCode() {
-
-        return Objects.hash(name, children, birth);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return children == user.children &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(birth, user.birth);
     }
 }
