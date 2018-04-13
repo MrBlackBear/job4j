@@ -1,6 +1,7 @@
 package ru.job4j.map;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * User
@@ -25,13 +26,25 @@ public class User {
 
     /**
      * Constructor
-     * @param name name
+     *
+     * @param name     name
      * @param children number of children
-     * @param birth date of birth
+     * @param birth    date of birth
      */
     public User(String name, int children, Calendar birth) {
         this.name = name;
         this.children = children;
         this.birth = birth;
+    }
+
+    /**
+     * HashCode of object
+     *
+     * @return hashCode
+     */
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, children, birth);
     }
 }
