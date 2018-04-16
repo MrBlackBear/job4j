@@ -78,6 +78,28 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Check binary tree or not
+     *
+     * @return true if tree is binary
+     */
+    public boolean isBinary() {
+        boolean rsl = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            if (el.leaves().size() > 2) {
+                rsl = false;
+                break;
+            }
+            for (Node<E> ch : el.leaves()) {
+                data.offer(ch);
+            }
+        }
+        return rsl;
+    }
+
+    /**
      * Iterator where we can go by all elements in tree
      *
      * @return iterator
