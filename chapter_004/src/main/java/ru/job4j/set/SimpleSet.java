@@ -19,7 +19,7 @@ public class SimpleSet<T> implements Iterable<T> {
     /**
      * Size of store
      */
-    int size = 0;
+    private int size = 0;
 
     /**
      * Constructor
@@ -36,17 +36,28 @@ public class SimpleSet<T> implements Iterable<T> {
      * @param e add element
      */
     public void add(T e) {
-        int flag = 0;
-        for (T item : simpleArray) {
-            if (item.equals(e)) {
-                flag = 1;
-                break;
-            }
-        }
-        if (flag == 0) {
+        boolean flag = this.noDuplicate(e);
+        if (flag) {
             simpleArray.add(e);
             size++;
         }
+    }
+
+    /**
+     * Search duplicates
+     *
+     * @param e element
+     * @return have store this element or not
+     */
+    private boolean noDuplicate(T e) {
+        boolean result = true;
+        for (T item : simpleArray) {
+            if (item.equals(e)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 
     /**
@@ -66,5 +77,14 @@ public class SimpleSet<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return simpleArray.iterator();
+    }
+
+    /**
+     * Size
+     *
+     * @return size
+     */
+    public int sizeSet() {
+        return size;
     }
 }

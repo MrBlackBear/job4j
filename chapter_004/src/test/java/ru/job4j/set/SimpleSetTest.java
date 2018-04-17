@@ -37,9 +37,9 @@ public class SimpleSetTest {
      */
     @Test
     public void add() {
-        assertThat(set.size, is(3));
+        assertThat(set.sizeSet(), is(3));
         set.add(44);
-        assertThat(set.size, is(4));
+        assertThat(set.sizeSet(), is(4));
         set.add(11);
         set.add(11);
         set.add(11);
@@ -47,7 +47,7 @@ public class SimpleSetTest {
         set.add(11);
         set.add(22);
         set.add(33);
-        assertThat(set.size, is(4));
+        assertThat(set.sizeSet(), is(4));
     }
 
     /**
