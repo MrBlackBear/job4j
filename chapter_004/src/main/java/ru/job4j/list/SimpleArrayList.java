@@ -87,8 +87,9 @@ public class SimpleArrayList<E> implements Iterable<E> {
              * Check modCount which was created when was created iterator with real modCount
              */
             private void checkForComodification() {
-                if (modCount != expectedModCount)
+                if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
+                }
             }
 
             /**

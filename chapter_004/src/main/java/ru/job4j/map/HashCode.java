@@ -11,7 +11,7 @@ public class HashCode {
     private boolean booleanValue = true;
     private char charValue = 'd';
     private String stringValue = "TestClass";
-    private long longValue = 34829245849498300l;
+    private long longValue = 34829245849498300L;
     private float floatValue = 345832400.93f;
     private double doubleValue = 98584292348454.9834;
     private byte[] arrayValue = {1, 2, 3};
@@ -26,8 +26,9 @@ public class HashCode {
         result = 37 * result + Float.floatToIntBits(floatValue);
         long longBits = Double.doubleToLongBits(doubleValue);
         result = 37 * result + (int) (longBits - (longBits >>> 32));
-        for (byte b : arrayValue)
+        for (byte b : arrayValue) {
             result = 37 * result + (int) b;
+        }
         return result;
     }
 }

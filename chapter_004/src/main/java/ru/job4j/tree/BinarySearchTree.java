@@ -29,10 +29,11 @@ public class BinarySearchTree<E extends Comparable<E>> implements Iterable<E> {
      * @param value value
      */
     public void insert(E value) {
-        if (isEmpty())
+        if (isEmpty()) {
             root = new Nod(value);
-        else
+        } else {
             insert(root, value);
+        }
     }
 
     /**
