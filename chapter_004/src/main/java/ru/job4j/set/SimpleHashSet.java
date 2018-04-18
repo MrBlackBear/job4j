@@ -28,7 +28,7 @@ public class SimpleHashSet<E> {
      * Hash function
      */
     private int hashFunc(E e) {
-        return e.hashCode() % array.length;
+        return Math.abs(e.hashCode()) % array.length;
     }
 
     /**
