@@ -43,7 +43,11 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
             size *= 2;
             Entry<K, V>[] oldStore = store;
             store = new Entry[size];
-            System.arraycopy(oldStore, 0, store, 0, size / 2);
+            for (Entry<K, V> entry : oldStore) {
+                if (entry != null) {
+                    store[hashFunc(entry.getKey())] = entry;
+                }
+            }
         }
     }
 
