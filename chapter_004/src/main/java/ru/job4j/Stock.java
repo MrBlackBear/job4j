@@ -2,11 +2,19 @@ package ru.job4j;
 
 import java.util.Random;
 
-public class Stock {
+public class Stock implements Comparable<Stock> {
     /**
      * Unique key of application
      */
     String id;
+
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "price=" + price +
+                '}';
+    }
+
     /**
      * Identifier of application
      */
@@ -60,5 +68,10 @@ public class Stock {
         this.action = action;
         this.price = price;
         this.volume = volume;
+    }
+
+    @Override
+    public int compareTo(Stock o) {
+        return o.price - this.price;
     }
 }
