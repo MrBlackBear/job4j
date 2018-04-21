@@ -38,6 +38,17 @@ public class SimpleHashSet<E> {
      * @return true if can add element
      */
     boolean add(E e) {
+        if (numberOfElements == size) {
+            Object[] oldArray = array;
+            size *= 2;
+            array = new Object[size];
+            for (Object el : oldArray) {
+                if (el != null) {
+                    int index = hashFunc((E) el);
+                    array[index] = el;
+                }
+            }
+        }
         boolean result = false;
         int index = hashFunc(e);
         if (array[index] == null) {

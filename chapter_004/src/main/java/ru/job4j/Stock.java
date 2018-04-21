@@ -10,9 +10,7 @@ public class Stock implements Comparable<Stock> {
 
     @Override
     public String toString() {
-        return "Stock{" +
-                "price=" + price +
-                '}';
+        return "Stock{" + "price=" + price + '}';
     }
 
     /**
