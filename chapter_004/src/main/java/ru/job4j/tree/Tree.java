@@ -32,23 +32,10 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         boolean rsl = false;
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
-        while (!data.isEmpty()) {
-            Node<E> el = data.poll();
-            for (Node<E> ch : el.leaves()) {
-                if (ch.eqValue(child)) {
-                    break;
-                }
-            }
-            if (el.eqValue(parent)) {
-                rsl = true;
-                el.add(new Node(child));
-                break;
-            }
-            for (Node<E> ch : el.leaves()) {
-                data.offer(ch);
-            }
+        Optional<Node<E>> par = findBy(parent);
+        if (par != null){
+            rsl = true;
+            par.get().add(new Node<>(child));
         }
         return rsl;
     }
