@@ -20,10 +20,7 @@ public class Converter {
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
 
         return new Iterator<Integer>() {
-            /**
-             * First iterator in lists of iterators
-             */
-            Iterator<Integer> iterator = check(it);
+            Iterator<Integer> current = it.next();
 
             /**
              * Return have iterator elements or no
@@ -31,11 +28,14 @@ public class Converter {
              */
             @Override
             public boolean hasNext() {
-                if (iterator == null) {
-                    return false;
+                while (!current.hasNext() && it.hasNext()) {
+                    current = it.next();
                 }
-                return iterator.hasNext() ? iterator.hasNext() : it.hasNext();
+
+                return  current.hasNext();
             }
+
+            ;
 
             /**
              * If iterator have element return element or throw exception
@@ -44,31 +44,10 @@ public class Converter {
              */
             @Override
             public Integer next() {
-                if (!iterator.hasNext() && it.hasNext()) {
-                    iterator = it.next();
+                if (!current.hasNext() && it.hasNext()) {
+                   current = it.next();
                 }
-                if (iterator.hasNext()) {
-                    return iterator.next();
-                } else {
-                    throw new NoSuchElementException(" No element");
-                }
-            }
-
-            /**
-             * Check iterator and put first not null iterator
-             * @param iteratorList list of iterators
-             * @return first not null iterator
-             */
-            private Iterator<Integer> check(Iterator<Iterator<Integer>> iteratorList) {
-                Iterator<Integer> iterator = iteratorList.hasNext() ? iteratorList.next() : null;
-                while (iterator != null) {
-                    if (iterator.hasNext()) {
-                        return iterator;
-                    } else {
-                        iterator = iteratorList.hasNext() ? iteratorList.next() : null;
-                    }
-                }
-                return iterator;
+                return current.next();
             }
         };
     }
