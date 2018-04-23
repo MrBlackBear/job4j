@@ -28,14 +28,7 @@ public class SimpleSetList<E> implements Iterable<E> {
      * @param e add if is not in store
      */
     public void add(E e) {
-        int flag = 0;
-        for (E item : list) {
-            if (item.equals(e)) {
-                flag = 1;
-                break;
-            }
-        }
-        if (flag == 0) {
+        if (!this.contains(e)) {
             list.add(e);
             size++;
         }
@@ -48,6 +41,17 @@ public class SimpleSetList<E> implements Iterable<E> {
      */
     public int size() {
         return this.size;
+    }
+
+    public boolean contains(E e){
+        boolean result = false;
+        for (E el:list) {
+            if (el.equals(e)){
+                result =true;
+                break;
+            }
+        }
+        return result;
     }
 
     /**
