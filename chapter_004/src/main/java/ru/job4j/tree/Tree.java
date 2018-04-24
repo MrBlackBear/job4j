@@ -33,7 +33,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public boolean add(E parent, E child) {
         boolean rsl = false;
         Optional<Node<E>> par = findBy(parent);
-        if (par != null){
+        if (par != null) {
             rsl = true;
             par.get().add(new Node<>(child));
         }

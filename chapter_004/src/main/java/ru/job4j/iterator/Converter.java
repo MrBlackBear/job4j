@@ -32,10 +32,8 @@ public class Converter {
                     current = it.next();
                 }
 
-                return  current.hasNext();
+                return current.hasNext();
             }
-
-            ;
 
             /**
              * If iterator have element return element or throw exception
@@ -45,7 +43,7 @@ public class Converter {
             @Override
             public Integer next() {
                 if (!current.hasNext() && it.hasNext()) {
-                   current = it.next();
+                    current = it.next();
                 }
                 return current.next();
             }

@@ -43,11 +43,11 @@ public class SimpleSetList<E> implements Iterable<E> {
         return this.size;
     }
 
-    public boolean contains(E e){
+    public boolean contains(E e) {
         boolean result = false;
-        for (E el:list) {
-            if (el.equals(e)){
-                result =true;
+        for (E el : list) {
+            if (el.equals(e)) {
+                result = true;
                 break;
             }
         }

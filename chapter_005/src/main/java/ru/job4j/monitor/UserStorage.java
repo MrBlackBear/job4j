@@ -16,8 +16,6 @@ public class UserStorage {
         return true;
     }
 
-    ;
-
     public synchronized boolean update(User user) {
         boolean result = users.contains(user);
         if (result) {
