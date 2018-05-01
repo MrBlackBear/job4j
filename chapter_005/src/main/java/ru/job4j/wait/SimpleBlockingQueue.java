@@ -7,33 +7,35 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 @ThreadSafe
-public class SimpleBlockingQueue<T> {
-
-    @GuardedBy("this")
-    private Queue<T> queue = new LinkedList<>();
+class SimpleBlockingQueue<T> {
+    @GuardedBy("queue")
+    private final Queue<T> queue = new LinkedList<>();
 
     void offer(T value) throws InterruptedException {
-        int size = 20;
-        synchronized (this) {
+        int size = 5;
+        synchronized (queue) {
             while (queue.size() == size) {
-                this.wait();
+                queue.wait();
             }
+            queue.notifyAll();
             queue.offer(value);
-            this.notifyAll();
         }
     }
 
     T poll() throws InterruptedException {
-        synchronized (this) {
+        int size = 5;
+        synchronized (queue) {
             while (queue.isEmpty()) {
                 this.wait();
             }
-            this.notifyAll();
+            queue.notifyAll();
             return queue.poll();
         }
     }
 
-    public synchronized boolean isEmp() {
-        return queue.isEmpty();
+    boolean isEmp() {
+        synchronized (queue) {
+            return queue.isEmpty();
+        }
     }
 }

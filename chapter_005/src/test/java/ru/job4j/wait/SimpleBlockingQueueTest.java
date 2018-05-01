@@ -1,5 +1,7 @@
 package ru.job4j.wait;
 
+import java.util.Random;
+
 public class SimpleBlockingQueueTest {
     public static void main(String[] args) throws InterruptedException {
         SimpleBlockingQueue<Integer> sbq = new SimpleBlockingQueue<>();
@@ -8,7 +10,6 @@ public class SimpleBlockingQueueTest {
         newProducer.start();
         newProducer.join();
         newCostumer.start();
-        newCostumer.join();
     }
 }
 
@@ -21,16 +22,18 @@ class Producer implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
-                System.out.printf("\n%s %s %s", Thread.currentThread().getName(), "добавил", i);
-                sbq.offer(i);
+                Integer in = new Random().nextInt(100);
+                System.out.printf("\n%s %s %s", Thread.currentThread().getName(), "добавил", in);
+                sbq.offer(in);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 }
+
 
 class Customer implements Runnable {
     private final SimpleBlockingQueue<Integer> sbq;
