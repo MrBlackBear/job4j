@@ -62,6 +62,20 @@ public class SimpleLinkedList<E> implements Iterable<E> {
         return result.element;
     }
 
+   public boolean contains(E element) {
+        Node<E> res = first;
+        boolean result = false;
+        while (res != null) {
+            if (res.element.equals(element)) {
+                result = true;
+                break;
+            } else {
+                res = res.next;
+            }
+        }
+        return result;
+    }
+
     /**
      * Iterator
      *
