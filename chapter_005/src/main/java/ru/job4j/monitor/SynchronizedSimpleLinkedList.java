@@ -8,15 +8,11 @@ import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
 public class SynchronizedSimpleLinkedList<E> implements Iterable<E> {
-
-    /**
-     * Real number of elements
-     */
-    private int realNumberOfElements;
     /**
      * Count of operation which was done with store
      */
-    private int modCount;
+    @GuardedBy("this")
+    private volatile int modCount;
     /**
      * First element in list
      */
@@ -42,7 +38,6 @@ public class SynchronizedSimpleLinkedList<E> implements Iterable<E> {
             last.next = newNode;
             last = newNode;
         }
-        realNumberOfElements++;
         modCount++;
     }
 
@@ -82,7 +77,7 @@ public class SynchronizedSimpleLinkedList<E> implements Iterable<E> {
             /**
              * Check modCount which was created when was created iterator with real modCount
              */
-            private void checkForComodification() {
+            private synchronized void checkForComodification() {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
@@ -117,7 +112,6 @@ public class SynchronizedSimpleLinkedList<E> implements Iterable<E> {
      *
      * @param <E> generic
      */
-
     private static class Node<E> {
         E element;
         Node<E> next;

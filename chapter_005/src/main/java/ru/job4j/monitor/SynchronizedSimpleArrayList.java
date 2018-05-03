@@ -16,18 +16,18 @@ public class SynchronizedSimpleArrayList<E> implements Iterable<E> {
     /**
      * Size of store
      */
-
+    @GuardedBy("this")
     private int size;
     /**
      * Real number of elements
      */
-
+    @GuardedBy("this")
     private int realNumberOfElements;
     /**
      * Count of operation which was done with store
      */
-
-    private int modCount;
+    @GuardedBy("this")
+    private volatile int modCount;
 
     /**
      * Constructor
@@ -76,6 +76,7 @@ public class SynchronizedSimpleArrayList<E> implements Iterable<E> {
     @Override
     public synchronized Iterator<E> iterator() {
         return new Iterator<E>() {
+            int realNum = realNumberOfElements;
             Object[] clone = container.clone();
             /**
              * Count of changes in array when iterator was created
@@ -102,7 +103,7 @@ public class SynchronizedSimpleArrayList<E> implements Iterable<E> {
             @Override
             public synchronized boolean hasNext() {
                 checkForComodification();
-                return realNumberOfElements > position;
+                return realNum > position;
             }
 
             /**
