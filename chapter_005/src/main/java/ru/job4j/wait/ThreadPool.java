@@ -1,13 +1,18 @@
 package ru.job4j.wait;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
+import java.util.Queue;
+import java.util.concurrent.SynchronousQueue;
+
+@ThreadSafe
 public class ThreadPool {
     /**
      * Queue of tasks.
      */
-    private final Queue<Work> queue = new LinkedList<>();
+    @GuardedBy("queue")
+    private final Queue<Work> queue = new SynchronousQueue<>();
 
     /**
      * Threads to run tasks.
@@ -18,11 +23,6 @@ public class ThreadPool {
      * Lock.
      */
     private final Object lock = new Object();
-
-    /**
-     * Close-flag.
-     */
-    private boolean closed = false;
 
     /**
      * Constructor with processors cores.
@@ -36,11 +36,10 @@ public class ThreadPool {
      *
      * @param cores int.
      */
-    public ThreadPool(int cores) {
+    private ThreadPool(int cores) {
         threads = new Thread[cores];
         for (int i = 0; i < threads.length; i++) {
             threads[i] = new Thread(new Work());
-            threads[i].start();
         }
     }
 
@@ -50,8 +49,8 @@ public class ThreadPool {
      * @param work work
      */
     public void add(Work work) {
-        synchronized (lock) {
-            if (!closed) {
+        synchronized (queue) {
+            if (!Thread.currentThread().isInterrupted()) {
                 queue.add(work);
                 lock.notifyAll();
             }
@@ -62,9 +61,14 @@ public class ThreadPool {
      * Shut Down Thread Pool.
      */
     public void shutdown() {
-        closed = true;
         for (Thread thread : threads) {
             thread.interrupt();
+        }
+    }
+
+    public void start() {
+        for (Thread t : threads) {
+            t.start();
         }
     }
 
@@ -74,25 +78,21 @@ public class ThreadPool {
     private class Work implements Runnable {
         @Override
         public void run() {
-            while (!closed) {
-                synchronized (lock) {
-                    while (queue.isEmpty() && !closed) {
-                        try {
-                            lock.wait();
-                        } catch (InterruptedException e) {
-                            break;
-                        }
+            synchronized (queue) {
+                while (queue.isEmpty()) {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        break;
                     }
                 }
-                if (!closed) {
-                    Runnable task;
-                    synchronized (queue) {
-                        task = queue.poll();
-                    }
-                    if (task != null) {
-                        task.run();
-                    }
-                }
+            }
+            Runnable task;
+            synchronized (queue) {
+                task = queue.poll();
+            }
+            if (task != null) {
+                task.run();
             }
         }
     }
