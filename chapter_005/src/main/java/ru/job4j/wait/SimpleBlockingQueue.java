@@ -10,11 +10,11 @@ import java.util.Queue;
 class SimpleBlockingQueue<T> {
     @GuardedBy("queue")
     private final Queue<T> queue = new LinkedList<>();
+    private static int MAX_SIZE = 5;
 
     void offer(T value) throws InterruptedException {
-        int size = 5;
         synchronized (queue) {
-            while (queue.size() == size) {
+            while (queue.size() == MAX_SIZE) {
                 queue.wait();
             }
             queue.notifyAll();
@@ -23,7 +23,6 @@ class SimpleBlockingQueue<T> {
     }
 
     T poll() throws InterruptedException {
-        int size = 5;
         synchronized (queue) {
             while (queue.isEmpty()) {
                 this.wait();

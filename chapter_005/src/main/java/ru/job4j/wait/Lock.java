@@ -1,8 +1,14 @@
 package ru.job4j.wait;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
+@ThreadSafe
 public class Lock {
-    private Object lock = new Object();
-    boolean flag = false;
+    @GuardedBy("lock")
+    private final Object lock = new Object();
+    private boolean flag = false;
+    private Thread t;
 
     public void lock() {
         synchronized (lock) {
@@ -14,13 +20,16 @@ public class Lock {
                 }
             }
             flag = true;
+            t = Thread.currentThread();
         }
     }
 
     public void unlock() {
-        synchronized (lock) {
-            flag = false;
-            lock.notifyAll();
+        if (t.equals(Thread.currentThread())) {
+            synchronized (lock) {
+                flag = false;
+                lock.notifyAll();
+            }
         }
     }
 }

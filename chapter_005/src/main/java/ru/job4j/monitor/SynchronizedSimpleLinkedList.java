@@ -77,7 +77,7 @@ public class SynchronizedSimpleLinkedList<E> implements Iterable<E> {
             /**
              * Check modCount which was created when was created iterator with real modCount
              */
-            private synchronized void checkForComodification() {
+            private void checkForComodification() {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
                 }
