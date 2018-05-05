@@ -3,8 +3,7 @@ package ru.job4j.wait;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
-import java.util.Queue;
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.*;
 
 @ThreadSafe
 public class ThreadPool {
@@ -12,16 +11,18 @@ public class ThreadPool {
      * Queue of tasks.
      */
     @GuardedBy("queue")
-    private final Queue<Work> queue = new SynchronousQueue<>();
+    private final BlockingQueue<Work> queue = new LinkedBlockingQueue<>();
 
     /**
      * Threads to run tasks.
      */
     private Thread[] threads;
 
+    private volatile boolean finish = false;
     /**
      * Lock.
      */
+    @GuardedBy("queue")
     private final Object lock = new Object();
 
     /**
@@ -50,9 +51,9 @@ public class ThreadPool {
      */
     public void add(Work work) {
         synchronized (queue) {
-            if (!Thread.currentThread().isInterrupted()) {
+            if (!finish) {
                 queue.add(work);
-                lock.notifyAll();
+                queue.notifyAll();
             }
         }
     }
@@ -64,6 +65,7 @@ public class ThreadPool {
         for (Thread thread : threads) {
             thread.interrupt();
         }
+        finish = true;
     }
 
     public void start() {
@@ -79,20 +81,21 @@ public class ThreadPool {
         @Override
         public void run() {
             synchronized (queue) {
-                while (queue.isEmpty()) {
+                if (queue.isEmpty()) {
+                    finish = true;
+                }
+                while (finish) {
                     try {
-                        lock.wait();
+                        queue.wait();
                     } catch (InterruptedException e) {
                         break;
                     }
                 }
-            }
-            Runnable task;
-            synchronized (queue) {
-                task = queue.poll();
-            }
-            if (task != null) {
-                task.run();
+                finish = false;
+                Runnable task = queue.poll();
+                if (task != null) {
+                    task.run();
+                }
             }
         }
     }
