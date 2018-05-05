@@ -7,7 +7,9 @@ import net.jcip.annotations.ThreadSafe;
 public class Lock {
     @GuardedBy("lock")
     private final Object lock = new Object();
+    @GuardedBy("lock")
     private boolean flag = false;
+    @GuardedBy("lock")
     private Thread t;
 
     public void lock() {
@@ -25,8 +27,8 @@ public class Lock {
     }
 
     public void unlock() {
-        if (t.equals(Thread.currentThread())) {
-            synchronized (lock) {
+        synchronized (lock) {
+            if (t.equals(Thread.currentThread())) {
                 flag = false;
                 lock.notifyAll();
             }
