@@ -10,7 +10,6 @@ public class ThreadPool {
     /**
      * Queue of tasks.
      */
-    @GuardedBy("queue")
     private final BlockingQueue<Work> queue = new LinkedBlockingQueue<>();
 
     /**
@@ -50,11 +49,10 @@ public class ThreadPool {
      * @param work work
      */
     public void add(Work work) {
-        synchronized (queue) {
-            if (!finish) {
-                queue.add(work);
-                queue.notifyAll();
-            }
+        if (finish) {
+            queue.add(work);
+            finish = false;
+            queue.notifyAll();
         }
     }
 
@@ -80,21 +78,25 @@ public class ThreadPool {
     private class Work implements Runnable {
         @Override
         public void run() {
-            synchronized (queue) {
-                if (queue.isEmpty()) {
-                    finish = true;
+            if (queue.isEmpty()) {
+                finish = true;
+            }
+            while (finish) {
+                try {
+                    queue.wait();
+                } catch (InterruptedException e) {
+                    break;
                 }
-                while (finish) {
-                    try {
-                        queue.wait();
-                    } catch (InterruptedException e) {
-                        break;
+            }
+            finish = false;
+            while (!finish) {
+                try {
+                    Runnable task = queue.poll(200, TimeUnit.MILLISECONDS);
+                    if (task != null) {
+                        task.run();
                     }
-                }
-                finish = false;
-                Runnable task = queue.poll();
-                if (task != null) {
-                    task.run();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
