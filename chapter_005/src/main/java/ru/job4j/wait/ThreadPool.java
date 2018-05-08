@@ -49,10 +49,8 @@ public class ThreadPool {
      * @param work work
      */
     public void add(Work work) {
-        if (finish) {
+        if (!finish) {
             queue.add(work);
-            finish = false;
-            queue.notifyAll();
         }
     }
 
@@ -78,17 +76,6 @@ public class ThreadPool {
     private class Work implements Runnable {
         @Override
         public void run() {
-            if (queue.isEmpty()) {
-                finish = true;
-            }
-            while (finish) {
-                try {
-                    queue.wait();
-                } catch (InterruptedException e) {
-                    break;
-                }
-            }
-            finish = false;
             while (!finish) {
                 try {
                     Runnable task = queue.poll(200, TimeUnit.MILLISECONDS);
@@ -96,7 +83,7 @@ public class ThreadPool {
                         task.run();
                     }
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    finish = true;
                 }
             }
         }
