@@ -13,80 +13,62 @@ public class SortDepartments {
     /**
      * All departments
      */
-    private Set<Org> organizations = new HashSet<>();
+    private ArrayList<Department> departmentArrayList = new ArrayList<>();
 
-    /**
-     * Constructor
-     *
-     * @param orgs org
-     */
-    public SortDepartments(Org... orgs) {
-        for (Org organization : orgs) {
-            organizations.add(organization);
-        }
+    public void addDep(Department department) {
+        departmentArrayList.add(department);
     }
 
     /**
      * Order departments by asc
      */
     public void orderByAsc() {
-        for (Org organiz : organizations) {
-            Collections.sort(organiz.get(), new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    String[] firstStr = o1.split("[\\\\s\\\\-\\\\.\\\\'\\\\?\\\\,\\\\_\\\\@]+");
-                    String[] secondStr = o2.split("[\\\\s\\\\-\\\\.\\\\'\\\\?\\\\,\\\\_\\\\@]+");
-                    int length = firstStr.length > secondStr.length ? secondStr.length : firstStr.length;
-                    int result = 0;
-                    for (int i = 0; i < length; i++) {
-                        if (firstStr[i].compareTo(secondStr[i]) != 0) {
-                            result = firstStr[i].compareTo(secondStr[i]) > 0 ? -1 : 1;
-                            break;
-                        } else {
-                            if (firstStr.length == length && secondStr.length == length) {
-                                result = o1.compareTo(o2) > 0 ? -1 : 1;
-                                break;
-                            }
-                            if (firstStr.length == length) {
-                                result = -1;
-                                break;
-                            }
-                            if (secondStr.length == length) {
-                                result = 1;
-                                break;
-                            }
-                        }
-                    }
-                    return result;
-                }
-            });
-            organiz.showDepartments();
-        }
+        Collections.sort(departmentArrayList);
     }
 
     /**
+     * a
      * Order departments by desc
      */
     public void orderByDesc() {
-        for (Org organiz : organizations) {
-            Collections.sort(organiz.get());
-            organiz.showDepartments();
+        Collections.sort(departmentArrayList, new Comparator<Department>() {
+            @Override
+            public int compare(Department o1, Department o2) {
+                int result;
+                if (o2.getIer() != o1.getIer()) {
+                    result = Integer.compare(o2.getIer(), o1.getIer());
+                } else {
+                    if (o2.getName().length() != o1.getName().length()) {
+                        result = Integer.compare(o1.getName().length(), o2.getName().length());
+                    } else {
+                        result = -o1.getName().compareTo(o2.getName());
+                    }
+                }
+                return result;
+            }
+        });
+    }
+
+    public void show() {
+        for (Department dep : departmentArrayList) {
+            System.out.println(dep.toString());
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        Org or= new Org();
-        or.add("K2");
-        or.add("K1");
-        or.add("K1\\SK1");
-        or.add("K1\\SK1\\SSK2");
-        or.add("K1\\SK1\\SSK1");
-        or.add("K1\\SK2");
-        or.add("K2\\SK1\\SSK1");
-        or.add("K2\\SK1\\SSK2");
-        or.add("K2\\SK1");
-        SortDepartments sortDepartments = new SortDepartments(or);
-        sortDepartments.orderByAsc();
+        SortDepartments sortDepartments = new SortDepartments();
+        sortDepartments.addDep(new Department("K2", 2));
+        sortDepartments.addDep(new Department("K1", 1));
+        sortDepartments.addDep(new Department("K1\\SK1", 1));
+        sortDepartments.addDep(new Department("K1\\SK1\\SSK2", 1));
+        sortDepartments.addDep(new Department("K1\\SK1\\SSK1", 1));
+        sortDepartments.addDep(new Department("K1\\SK2", 1));
+        sortDepartments.addDep(new Department("K2\\SK1\\SSK1", 2));
+        sortDepartments.addDep(new Department("K2\\SK1\\SSK2", 2));
+        sortDepartments.addDep(new Department("K2\\SK1", 2));
+        sortDepartments.addDep(new Department("K2\\SK2", 2));
         sortDepartments.orderByDesc();
+        sortDepartments.show();
     }
 }
