@@ -29,6 +29,24 @@ class ParallelSearch {
         this.texts = exts;
     }
 
+    private void findTextInFile(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains(text)) {
+                    synchronized (ParallelSearch.this) {
+                        paths.add(file.getName());
+                        break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Not found file!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void init() {
         Thread search = new Thread(() -> {
             Path path = Paths.get(root);
@@ -48,27 +66,12 @@ class ParallelSearch {
                         name = files.poll();
                         if (name != null) {
                             File file = new File(name);
-                            try {
-                                BufferedReader reader = new BufferedReader(new FileReader(file));
-                                String line;
-                                while ((line = reader.readLine()) != null) {
-                                    if (line.contains(text)) {
-                                        synchronized (paths) {
-                                            paths.add(file.getName());
-                                            break;
-                                        }
-                                    }
-                                }
-                            } catch (FileNotFoundException e) {
-                                System.out.println("Not found file!");
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            findTextInFile(file);
                         }
                     } else {
                         try {
                             while (files.isEmpty()) {
-                                files.wait();
+                                ParallelSearch.this.wait();
                             }
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -83,34 +86,19 @@ class ParallelSearch {
         return this.files;
     }
 
-    class MyFileVisitor implements FileVisitor {
-
-        @Override
-        public FileVisitResult preVisitDirectory(Object dir, BasicFileAttributes attrs) throws IOException {
-            return FileVisitResult.CONTINUE;
-        }
-
+    class MyFileVisitor extends SimpleFileVisitor {
         @Override
         public FileVisitResult visitFile(Object file, BasicFileAttributes attrs) throws IOException {
             File newFile = new File(file.toString());
             for (String text : texts) {
-                if (newFile.toString().contains(text)) {
+                String exe = "." + text;
+                if (newFile.toString().contains(exe)) {
                     synchronized (ParallelSearch.this) {
                         files.offer(newFile.getAbsolutePath());
                         ParallelSearch.this.notify();
                     }
                 }
             }
-            return FileVisitResult.CONTINUE;
-        }
-
-        @Override
-        public FileVisitResult visitFileFailed(Object file, IOException exc) throws IOException {
-            return FileVisitResult.CONTINUE;
-        }
-
-        @Override
-        public FileVisitResult postVisitDirectory(Object dir, IOException exc) throws IOException {
             return FileVisitResult.CONTINUE;
         }
     }
