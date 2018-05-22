@@ -8,7 +8,7 @@ public class DeadLock {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (first){
+                synchronized (first) {
                     System.out.println(Thread.currentThread().getName() + "get first monitor");
                     try {
                         Thread.sleep(1000);
@@ -16,7 +16,7 @@ public class DeadLock {
                         e.printStackTrace();
                     }
                     System.out.println(Thread.currentThread().getName() + "trying to get second monitor");
-                    synchronized (second){
+                    synchronized (second) {
                         System.out.println(Thread.currentThread().getName() + "get second monitor");
                     }
                 }
@@ -26,7 +26,7 @@ public class DeadLock {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (second){
+                synchronized (second) {
                     System.out.println(Thread.currentThread().getName() + "get second monitor");
                     try {
                         Thread.sleep(1000);
@@ -34,7 +34,7 @@ public class DeadLock {
                         e.printStackTrace();
                     }
                     System.out.println(Thread.currentThread().getName() + "trying to get first monitor");
-                    synchronized (first){
+                    synchronized (first) {
                         System.out.println(Thread.currentThread().getName() + "get first monitor");
                     }
                 }

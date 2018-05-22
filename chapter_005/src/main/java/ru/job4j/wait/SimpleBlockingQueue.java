@@ -10,7 +10,7 @@ import java.util.Queue;
 class SimpleBlockingQueue<T> {
     @GuardedBy("queue")
     private final Queue<T> queue = new LinkedList<>();
-    private static int MAX_SIZE = 5;
+    private final static int MAX_SIZE = 5;
 
     void offer(T value) throws InterruptedException {
         synchronized (queue) {
