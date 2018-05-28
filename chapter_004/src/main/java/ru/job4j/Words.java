@@ -22,12 +22,4 @@ public class Words {
         }
         return hm1.isEmpty();
     }
-
-    public static void main(String[] args) {
-        Words w = new Words();
-        System.out.println(w.isAnnagram("top", "ort"));
-        System.out.println(w.isAnnagram("top", "opt"));
-        System.out.println(w.isAnnagram("topo", "opto"));
-        System.out.println(w.isAnnagram("topou", "ophto"));
-    }
 }
