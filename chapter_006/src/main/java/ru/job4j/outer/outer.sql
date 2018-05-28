@@ -23,6 +23,6 @@ create table gearbox (
 
 select * from cars;
 
-select e.name from engine as e right outer join cars as c on c.id_engine <> e.id;
-select t.name from transmission as t right outer join cars as c on c.id_transmission <> t.id;
-select g.name from gearbox as g right outer join cars as c on c.id_gearbox <> g.id;
+select e.name as engine_name ,c.name as car_name from engine as e left outer join cars as c on c.id_engine = e.id where c.id is null;
+select t.name as tr_name, c.name as car_name from transmission as t left outer join cars as c on c.id_transmission = t.id where c.id is null;
+select g.name as gear_name,c.name as car_name from gearbox as g right outer join cars as c on c.id_gearbox = g.id where c.id is null;
